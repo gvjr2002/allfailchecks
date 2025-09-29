@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- FAILURE 1: Strict CSP that blocks VWO -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self';">
+    
+    <title>VWO Debugger Test - ALL FAILURES</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            margin: 0 0 10px 0;
+        }
+        
+        .alert-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .alert-box h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .test-section h2 {
+            color: #dc3545;
+            margin-top: 0;
+            border-bottom: 2px solid #dc3545;
+            padding-bottom: 10px;
+        }
+        
+        .failure-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8d7da;
+            border-radius: 5px;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .failure-item h3 {
+            color: #721c24;
+            margin-top: 0;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .status.fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        
+        .diagnostic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .diagnostic-table th,
+        .diagnostic-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .diagnostic-table th {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .diagnostic-table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .fail-badge {
+            background: #dc3545;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚠️ VWO Debugger Test - ALL CHECKS FAIL</h1>
+        <p>Maximum failure scenario - everything broken</p>
+    </div>
+
+    <div class="alert-box">
+        <h3>⚠️ Critical: All VWO Checks Will Fail</h3>
+        <p>This page contains multiple intentional errors to test debugger failure detection.</p>
+    </div>
+
+    <div class="test-section">
+        <h2>Expected Failures</h2>
+        <table class="diagnostic-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Check Name</th>
+                    <th>Expected Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>0</td><td>SmartCode Directly Added Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>1</td><td>Duplicate SmartCode Detection</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>2</td><td>Console Error Analysis</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>3</td><td>Network Request Validation</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>4</td><td>Cookie Validation</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>5</td><td>jQuery Dependency Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>6</td><td>Script Syntax Validation</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>7</td><td>Script Tag Location Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>8</td><td>Script Type and Async Validation</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>9</td><td>JavaScript Syntax Validation</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>10</td><td>Defer Attribute Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>11</td><td>script_vis_opt_url Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>12</td><td>Script Referrer Policy Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>13</td><td>Script Rocket Loader Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>14</td><td>Script Next Script Tag Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>15</td><td>Domain Registered Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>16</td><td>Consent Manager Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>17</td><td>SmartCode Version Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>18</td><td>Third-Party Initializer Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>19</td><td>Timeout Tolerance Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+                <tr><td>20</td><td>CSP Status Check</td><td><span class="fail-badge">FAIL</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="test-section">
+        <h2>Failure Details</h2>
+        
+        <div class="failure-item">
+            <h3>1. CSP Blocking All VWO Requests</h3>
+            <div class="code-block">Content-Security-Policy: connect-src 'self'
+Blocks: https://dev.visualwebsiteoptimizer.com</div>
+        </div>
+
+        <div class="failure-item">
+            <h3>2. SmartCode Placed After Body (Wrong Location)</h3>
+            <p>Script is at the bottom of the page instead of in HEAD</p>
+        </div>
+
+        <div class="failure-item">
+            <h3>3. Multiple Duplicate SmartCodes</h3>
+            <p>Same SmartCode appears 3 times in the page</p>
+        </div>
+
+        <div class="failure-item">
+            <h3>4. Async & Defer Attributes Present</h3>
+            <p>Both async and defer causing race conditions</p>
+        </div>
+
+        <div class="failure-item">
+            <h3>5. Syntax Errors in Script</h3>
+            <p>Missing brackets, undefined variables, invalid values</p>
+        </div>
+
+        <div class="failure-item">
+            <h3>6. Wrong Account ID</h3>
+            <p>Account ID set to 0 (invalid)</p>
+        </div>
+
+        <div class="failure-item">
+            <h3>7. Negative Timeout Values</h3>
+            <p>settings_tolerance and library_tolerance set to -1</p>
+        </div>
+
+        <div class="failure-item">
+            <h3>8. Outdated SmartCode Version</h3>
+            <p>Version set to 0.1 (very old)</p>
+        </div>
+
+        <div class="failure-item">
+            <h3>9. Referrer Policy Blocking</h3>
+            <p>Strict referrer policy prevents VWO tracking</p>
+        </div>
+
+        <div class="failure-item">
+            <h3>10. jQuery Conflicts</h3>
+            <p>use_existing_jquery set incorrectly</p>
+        </div>
+    </div>
+
+    <script>
+        // Generate console errors for debugger to catch
+        console.error('[VWO] CRITICAL: CSP blocking all VWO requests');
+        console.error('[VWO] SmartCode not found in HEAD section');
+        console.error('[VWO] Multiple SmartCode instances detected (duplicate)');
+        console.error('[VWO] Syntax error in SmartCode configuration');
+        console.error('[VWO] Invalid account_id: 0');
+        console.error('[VWO] Negative timeout values detected');
+        console.error('[VWO] Network request to dev.visualwebsiteoptimizer.com blocked by CSP');
+        console.error('[VWO] Failed to initialize: window.VWO is undefined');
+        console.error('[VWO] Cookie setting failed - third-party cookies blocked');
+        console.warn('[VWO] Async attribute detected on SmartCode script');
+        console.warn('[VWO] Defer attribute detected on SmartCode script');
+        console.error('[VWO] Script placed after <body> tag');
+        console.error('[VWO] Outdated SmartCode version: 0.1');
+        console.error('[VWO] jQuery dependency issue detected');
+        console.error('[VWO] Strict referrer-policy blocking VWO');
+        console.error('[VWO] Cloudflare Rocket Loader interfering with VWO');
+    </script>
+
+</body>
+
+<!-- FAILURE: DUPLICATE SmartCode #1 (Placed AFTER body - wrong location) -->
+<script type="text/javascript" id="vwoCode1" async defer referrerpolicy="no-referrer">
+window._vwo_code || (function() {
+var account_id=0, // FAILURE: Invalid account ID
+version=0.1, // FAILURE: Outdated version
+settings_tolerance=-1, // FAILURE: Negative value
+library_tolerance=-1, // FAILURE: Negative value
+hide_element='body',
+hide_element_style = 'opacity:0 !important;',
+f=false,w=window,d=document,v=d.querySelector('#vwoCode1'),cK='_vwo_'+account_id+'_settings',cc={};
+// FAILURE: Syntax error - missing semicolon and bracket
+try{var c=JSON.parse(localStorage.getItem('_vwo_'+account_id+'_config'));cc=c&&typeof c==='object'?c:{}}catch(e){}
+var stT=cc.stT==='session'?w.sessionStorage:w.localStorage
+code={
+    use_existing_jquery:undefined, // FAILURE: Should be boolean
+    finish:function(){console.error('[VWO] finish() called but initialization failed')},
+    init:function(){
+        console.error('[VWO] init() attempting but will fail due to CSP');
+        // This will be blocked by CSP
+        var s='https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id;
+        this.addScript({src:s});
+    }
+};
+w._vwo_code=code;
+// FAILURE: Missing closing bracket
+})();
+</script>
+
+<!-- FAILURE: DUPLICATE SmartCode #2 (Also after body) -->
+<script type="text/javascript" id="vwoCode2" async defer>
+window._vwo_code || (function() {
+var account_id=0,version=0.1,settings_tolerance=-1,library_tolerance=-1;
+console.error('[VWO] Duplicate SmartCode #2 detected');
+})();
+</script>
+
+<!-- FAILURE: DUPLICATE SmartCode #3 (Third instance) -->
+<script type="text/javascript" id="vwoCode3" async defer>
+window._vwo_code || (function() {
+var account_id=0,version=0.1,settings_tolerance=-1;
+console.error('[VWO] Duplicate SmartCode #3 detected');
+// FAILURE: Syntax error
+var broken = {
+    unclosed: 'bracket'
+    // missing closing bracket
+;
+})();
+</script>
+
+<!-- FAILURE: Simulate Cloudflare Rocket Loader interference -->
+<script data-cfasync="false">
+console.warn('[VWO] Cloudflare Rocket Loader detected - may interfere with VWO');
+</script>
+
+<!-- FAILURE: Wrong script after VWO code -->
+<script>
+console.error('[VWO] Another script immediately after SmartCode - timing issue');
+// This violates the "no script immediately after" rule
+</script>
+
+</html>

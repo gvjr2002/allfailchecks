@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Failing Checks Example</title>
 
-  <!-- (12) Referrer Policy Check FAIL: No referrer-policy meta tag added -->
-
-  <!-- (5) jQuery Dependency Check FAIL: Explicit jQuery included -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
+	<script type="text/javascript">
      const params = new URLSearchParams(window.location.search);
      const accId = parseInt(params.get("id"));
-     const accountId = accId || 1112801;
+     const accountId = accId || 21000071;
      console.log("Account-Id ->", accountId);
      /* eslint-disable no-undef */
 window._vwo_code || (function() {
@@ -27,7 +20,17 @@ f=false,w=window,d=document,v=d.querySelector('#vwoCode'),cK='_vwo_'+account_id+
         a: 100,
         t: 100
     };	    
-	
+	</script>
+  <meta charset="UTF-8">
+  <title>Failing Checks Example</title>
+
+  <!-- (12) Referrer Policy Check FAIL: No referrer-policy meta tag added -->
+
+  <!-- (5) jQuery Dependency Check FAIL: Explicit jQuery included -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    
 
   <!-- (13) Rocket Loader Check FAIL: Cloudflare Rocket Loader attribute -->
   <script data-cfasync="false" src="https://example.com/fake.js"></script>

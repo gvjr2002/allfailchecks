@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VWO Test - Two More Different Failures</title>
+    
+    <script type="text/javascript">
+        const params = new URLSearchParams(window.location.search);
+        const accId = parseInt(params.get("id"));
+        const accountId = accId || 1112801;
+        console.log("Account-Id ->", accountId);
+        /* eslint-disable no-undef */
+        window._vwo_code || (function() {
+        var account_id=accountId,
+        version=2.1,
+        settings_tolerance=2000,
+        hide_element='body',
+        hide_element_style = 'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important',
+        /* DO NOT EDIT BELOW THIS LINE */
+        f=false,w=window,d=document,v=d.querySelector('#vwoCode'),cK='_vwo_'+account_id+'_settings',cc={};try{var c=JSON.parse(localStorage.getItem('_vwo_'+account_id+'_config'));cc=c&&typeof c==='object'?c:{}}catch(e){}var stT=cc.stT==='session'?w.sessionStorage:w.localStorage;code={use_existing_jquery:function(){return typeof use_existing_jquery!=='undefined'?use_existing_jquery:undefined},library_tolerance:function(){return typeof library_tolerance!=='undefined'?library_tolerance:undefined},settings_tolerance:function(){return cc.sT||settings_tolerance},hide_element_style:function(){return'{'+(cc.hES||hide_element_style)+'}'},hide_element:function(){if(performance.getEntriesByName('first-contentful-paint')[0]){return''}return typeof cc.hE==='string'?cc.hE:hide_element},getVersion:function(){return version},finish:function(e){if(!f){f=true;var t=d.getElementById('_vis_opt_path_hides');if(t)t.parentNode.removeChild(t);if(e)(new Image).src='https://dev.visualwebsiteoptimizer.com/ee.gif?a='+account_id+e}},finished:function(){return f},addScript:function(e){var t=d.createElement('script');t.type='text/javascript';if(e.src){t.src=e.src}else{t.text=e.text}d.getElementsByTagName('head')[0].appendChild(t)},load:function(e,t){var i=this.getSettings(),n=d.createElement('script'),r=this;t=t||{};if(i){n.textContent=i;d.getElementsByTagName('head')[0].appendChild(n);if(!w.VWO||VWO.caE){stT.removeItem(cK);r.load(e)}}else{var o=new XMLHttpRequest;o.open('GET',e,true);o.withCredentials=!t.dSC;o.responseType=t.responseType||'text';o.onload=function(){if(t.onloadCb){return t.onloadCb(o,e)}if(o.status===200){_vwo_code.addScript({text:o.responseText})}else{_vwo_code.finish('&e=loading_failure:'+e)}};o.onerror=function(){if(t.onerrorCb){return t.onerrorCb(e)}_vwo_code.finish('&e=loading_failure:'+e)};o.send()}},getSettings:function(){try{var e=stT.getItem(cK);if(!e){return}e=JSON.parse(e);if(Date.now()>e.e){stT.removeItem(cK);return}return e.s}catch(e){return}},init:function(){if(d.URL.indexOf('__vwo_disable__')>-1)return;
+            // FAIL #1: Console Error Analysis - Intentional JavaScript error
+            var undefinedVariable = someNonExistentObject.property; // This will throw an error
+            
+            var e=this.settings_tolerance();w._vwo_settings_timer=setTimeout(function(){_vwo_code.finish();stT.removeItem(cK)},e);var t;if(this.hide_element()!=='body'){t=d.createElement('style');var i=this.hide_element(),n=i?i+this.hide_element_style():'',r=d.getElementsByTagName('head')[0];t.setAttribute('id','_vis_opt_path_hides');v&&t.setAttribute('nonce',v.nonce);t.setAttribute('type','text/css');if(t.styleSheet)t.styleSheet.cssText=n;else t.appendChild(d.createTextNode(n));r.appendChild(t)}else{t=d.getElementsByTagName('head')[0];var n=d.createElement('div');n.style.cssText='z-index: 2147483647 !important;position: fixed !important;left: 0 !important;top: 0 !important;width: 100% !important;height: 100% !important;background: white !important;';n.setAttribute('id','_vis_opt_path_hides');n.classList.add('_vis_hide_layer');t.parentNode.insertBefore(n,t.nextSibling)}var o='https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&vn='+version;if(w.location.search.indexOf('_vwo_xhr')!==-1){this.addScript({src:o})}else{this.load(o+'&x=true')}}};w._vwo_code=code;code.init();})();
+        window._vwo_pc_custom = {
+            a: 100,
+            t: 100
+        };
+    </script>
+    
+    <!-- FAIL #2: SmartCode Version Check - Add version mismatch -->
+    <script type="text/javascript">
+        // Create version mismatch by overriding VWO version after SmartCode loads
+        setTimeout(function() {
+            if (window.VWO) {
+                // Override version to create mismatch
+                window.VWO.version = '1.8'; // Different from SmartCode version 2.1
+                console.log('VWO version overridden to create mismatch: SmartCode 2.1 vs VWO 1.8');
+            }
+            
+            // Also create a separate version indicator
+            window._vwo_smartcode_version = '2.1'; // SmartCode reports this
+            window._vwo_library_version = '1.8';   // But library reports this
+        }, 500);
+    </script>
+</head>
+
+<body>
+    <h1>VWO Test Page - Two More Different Failures</h1>
+    <p>This page is designed to fail exactly 2 more different VWO audit checks:</p>
+    
+    <div style="background: #ffebee; padding: 20px; border-radius: 5px; margin: 20px 0;">
+        <h3>❌ Expected Failures:</h3>
+        <ol>
+            <li><strong>Console Error Analysis</strong> - Intentional JavaScript error in SmartCode init</li>
+            <li><strong>SmartCode Version Check</strong> - Version mismatch (SmartCode 2.1 vs VWO Library 1.8)</li>
+        </ol>
+    </div>
+    
+    <div style="background: #e8f5e8; padding: 20px; border-radius: 5px; margin: 20px 0;">
+        <h3>✅ Expected Passes:</h3>
+        <ul>
+            <li>SmartCode Directly Added Check - SmartCode is present</li>
+            <li>Account ID Validation - Correct account ID used</li>
+            <li>Duplicate SmartCode Detection - Only one SmartCode instance</li>
+            <li>Network Request Validation - Requests can be made</li>
+            <li>Cookie Validation - Cookies can be set</li>
+            <li>jQuery Dependency Check - No jQuery dependency issues</li>
+            <li>Script Syntax Validation - Valid JavaScript syntax (except intentional error)</li>
+            <li>Script Tag Placement - SmartCode properly in head</li>
+            <li>Timeout Tolerance Check - Normal timeout (2000ms)</li>
+            <li>CSP Errors Check - No CSP restrictions</li>
+            <li>And 10+ other checks should pass...</li>
+        </ul>
+    </div>
+    
+    <button onclick="testVWOStatus()" style="background: #2196F3; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+        Test VWO Status
+    </button>
+    
+    <div id="status" style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 5px; font-family: monospace;">
+        Click the button to test VWO status...
+    </div>
+    
+    <script>
+        function testVWOStatus() {
+            const statusDiv = document.getElementById('status');
+            let status = '';
+            
+            // Check VWO loading status
+            if (typeof window._vwo_code !== 'undefined') {
+                status += '✅ VWO SmartCode: Loaded\n';
+            } else {
+                status += '❌ VWO SmartCode: Not found\n';
+            }
+            
+            // Check for console errors
+            status += '❌ Console Errors: JavaScript error detected in SmartCode init\n';
+            
+            // Check version mismatch
+            const smartcodeVersion = window._vwo_smartcode_version || '2.1';
+            const libraryVersion = window._vwo_library_version || (window.VWO && window.VWO.version) || 'Unknown';
+            status += `❌ Version Mismatch: SmartCode ${smartcodeVersion} vs Library ${libraryVersion}\n`;
+            
+            // Check account ID
+            status += `✅ Account ID: ${window.location.search.includes('id=') ? new URLSearchParams(window.location.search).get('id') : '1112801'}\n`;
+            
+            // Check for network requests (should work)
+            status += '✅ Network Requests: No CSP blocking\n';
+            
+            // Check timeout tolerance
+            status += '✅ Timeout Tolerance: Normal (2000ms)\n';
+            
+            // Check script placement
+            status += '✅ Script Placement: SmartCode properly in head section\n';
+            
+            // Check for duplicates
+            status += '✅ Duplicate SmartCode: None detected\n';
+            
+            statusDiv.innerHTML = '<pre>' + status + '</pre>';
+        }
+        
+        // Trigger additional console errors for testing
+        function triggerConsoleError() {
+            try {
+                // This will cause a console error
+                nonExistentFunction();
+            } catch (e) {
+                console.error('Additional test error:', e.message);
+            }
+        }
+        
+        // Log the expected failures
+        console.log('🚨 Expected Failures:');
+        console.log('1. Console Error Analysis - JavaScript error in SmartCode init');
+        console.log('2. SmartCode Version Check - Version mismatch (2.1 vs 1.8)');
+        
+        // Trigger the console error immediately
+        triggerConsoleError();
+        
+        // Monitor for the version mismatch
+        setTimeout(() => {
+            if (window.VWO && window.VWO.version) {
+                console.log(`Version mismatch detected: SmartCode 2.1 vs VWO ${window.VWO.version}`);
+            }
+        }, 1000);
+        
+        // Simulate cookie blocking for additional testing
+        const originalCookieDescriptor = Object.getOwnPropertyDescriptor(Document.prototype, 'cookie');
+        if (originalCookieDescriptor) {
+            // Don't actually block cookies for this test - let them work normally
+            console.log('✅ Cookies: Allowed for this test');
+        }
+        
+        // Add some additional error scenarios that could be detected
+        window.addEventListener('error', function(event) {
+            console.error('Global error caught:', event.error.message);
+        });
+        
+        // Simulate network request monitoring
+        const originalXHR = window.XMLHttpRequest;
+        window.XMLHttpRequest = function() {
+            const xhr = new originalXHR();
+            const originalOpen = xhr.open;
+            xhr.open = function(method, url, ...args) {
+                if (url.includes('visualwebsiteoptimizer.com') || url.includes('vwo.com')) {
+                    console.log('VWO network request detected:', url);
+                }
+                return originalOpen.apply(this, [method, url, ...args]);
+            };
+            return xhr;
+        };
+    </script>
+</body>
+</html>

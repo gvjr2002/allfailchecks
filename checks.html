@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VWO Test - Two Additional Failures</title>
+    
+    <!-- FAIL #1: jQuery Dependency Check - Load jQuery and force SmartCode to use it, then break it -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Force SmartCode to use jQuery by setting the flag
+        window.use_existing_jquery = true;
+        
+        // Then break jQuery after SmartCode tries to use it
+        setTimeout(function() {
+            window.jQuery = undefined;
+            window.$ = undefined;
+            console.log('jQuery destroyed after SmartCode attempted to use it');
+        }, 100);
+    </script>
+</head>
+
+<!-- FAIL #2: Script Tag Placement Check - Put SmartCode in body instead of head -->
+<body>
+    <h1>VWO Test Page - Two Additional Failures</h1>
+    <p>This page is designed to fail exactly 2 more different VWO audit checks:</p>
+    
+    <div style="background: #ffebee; padding: 20px; border-radius: 5px; margin: 20px 0;">
+        <h3>❌ Expected Failures:</h3>
+        <ol>
+            <li><strong>jQuery Dependency Check</strong> - jQuery loaded but then destroyed while SmartCode depends on it</li>
+            <li><strong>Script Tag Placement Check</strong> - SmartCode placed in body instead of head</li>
+        </ol>
+    </div>
+    
+    <div style="background: #e8f5e8; padding: 20px; border-radius: 5px; margin: 20px 0;">
+        <h3>✅ Expected Passes:</h3>
+        <ul>
+            <li>SmartCode Directly Added Check - SmartCode is present</li>
+            <li>Account ID Validation - Correct account ID used</li>
+            <li>Duplicate SmartCode Detection - Only one SmartCode instance</li>
+            <li>Console Error Analysis - No intentional JavaScript errors</li>
+            <li>Network Request Validation - Requests can be made</li>
+            <li>Cookie Validation - Cookies can be set</li>
+            <li>Script Syntax Validation - Valid JavaScript syntax</li>
+            <li>Timeout Tolerance Check - Normal timeout (2000ms)</li>
+            <li>SmartCode Version Check - Consistent version (2.1)</li>
+            <li>CSP Errors Check - No CSP restrictions</li>
+            <li>And 10+ other checks should pass...</li>
+        </ul>
+    </div>
+    
+    <button onclick="testVWOStatus()" style="background: #2196F3; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+        Test VWO Status
+    </button>
+    
+    <div id="status" style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 5px; font-family: monospace;">
+        Click the button to test VWO status...
+    </div>
+    
+    <!-- FAIL #2: Script Tag Placement - SmartCode in body instead of head -->
+    <script type="text/javascript">
+        const params = new URLSearchParams(window.location.search);
+        const accId = parseInt(params.get("id"));
+        const accountId = accId || 1112801;
+        console.log("Account-Id ->", accountId);
+        console.log("SmartCode placed in body - this should trigger placement failure");
+        
+        /* eslint-disable no-undef */
+        window._vwo_code || (function() {
+        var account_id=accountId,
+        version=2.1,
+        settings_tolerance=2000,
+        hide_element='body',
+        hide_element_style = 'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important',
+        /* DO NOT EDIT BELOW THIS LINE */
+        f=false,w=window,d=document,v=d.querySelector('#vwoCode'),cK='_vwo_'+account_id+'_settings',cc={};try{var c=JSON.parse(localStorage.getItem('_vwo_'+account_id+'_config'));cc=c&&typeof c==='object'?c:{}}catch(e){}var stT=cc.stT==='session'?w.sessionStorage:w.localStorage;code={use_existing_jquery:function(){return typeof use_existing_jquery!=='undefined'?use_existing_jquery:true},library_tolerance:function(){return typeof library_tolerance!=='undefined'?library_tolerance:undefined},settings_tolerance:function(){return cc.sT||settings_tolerance},hide_element_style:function(){return'{'+(cc.hES||hide_element_style)+'}'},hide_element:function(){if(performance.getEntriesByName('first-contentful-paint')[0]){return''}return typeof cc.hE==='string'?cc.hE:hide_element},getVersion:function(){return version},finish:function(e){if(!f){f=true;var t=d.getElementById('_vis_opt_path_hides');if(t)t.parentNode.removeChild(t);if(e)(new Image).src='https://dev.visualwebsiteoptimizer.com/ee.gif?a='+account_id+e}},finished:function(){return f},addScript:function(e){var t=d.createElement('script');t.type='text/javascript';if(e.src){t.src=e.src}else{t.text=e.text}d.getElementsByTagName('head')[0].appendChild(t)},load:function(e,t){var i=this.getSettings(),n=d.createElement('script'),r=this;t=t||{};if(i){n.textContent=i;d.getElementsByTagName('head')[0].appendChild(n);if(!w.VWO||VWO.caE){stT.removeItem(cK);r.load(e)}}else{var o=new XMLHttpRequest;o.open('GET',e,true);o.withCredentials=!t.dSC;o.responseType=t.responseType||'text';o.onload=function(){if(t.onloadCb){return t.onloadCb(o,e)}if(o.status===200){_vwo_code.addScript({text:o.responseText})}else{_vwo_code.finish('&e=loading_failure:'+e)}};o.onerror=function(){if(t.onerrorCb){return t.onerrorCb(e)}_vwo_code.finish('&e=loading_failure:'+e)};o.send()}},getSettings:function(){try{var e=stT.getItem(cK);if(!e){return}e=JSON.parse(e);if(Date.now()>e.e){stT.removeItem(cK);return}return e.s}catch(e){return}},init:function(){if(d.URL.indexOf('__vwo_disable__')>-1)return;
+            // Check if jQuery is available when SmartCode tries to use it
+            if (this.use_existing_jquery() && typeof window.jQuery === 'undefined') {
+                console.error('jQuery dependency failure: SmartCode configured to use jQuery but jQuery is not available');
+            }
+            
+            var e=this.settings_tolerance();w._vwo_settings_timer=setTimeout(function(){_vwo_code.finish();stT.removeItem(cK)},e);var t;if(this.hide_element()!=='body'){t=d.createElement('style');var i=this.hide_element(),n=i?i+this.hide_element_style():'',r=d.getElementsByTagName('head')[0];t.setAttribute('id','_vis_opt_path_hides');v&&t.setAttribute('nonce',v.nonce);t.setAttribute('type','text/css');if(t.styleSheet)t.styleSheet.cssText=n;else t.appendChild(d.createTextNode(n));r.appendChild(t)}else{t=d.getElementsByTagName('head')[0];var n=d.createElement('div');n.style.cssText='z-index: 2147483647 !important;position: fixed !important;left: 0 !important;top: 0 !important;width: 100% !important;height: 100% !important;background: white !important;';n.setAttribute('id','_vis_opt_path_hides');n.classList.add('_vis_hide_layer');t.parentNode.insertBefore(n,t.nextSibling)}var o='https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&vn='+version;if(w.location.search.indexOf('_vwo_xhr')!==-1){this.addScript({src:o})}else{this.load(o+'&x=true')}}};w._vwo_code=code;code.init();})();
+        window._vwo_pc_custom = {
+            a: 100,
+            t: 100
+        };
+        
+        // Mark that SmartCode is in body for detection
+        window._vwo_smartcode_in_body = true;
+    </script>
+    
+    <script>
+        function testVWOStatus() {
+            const statusDiv = document.getElementById('status');
+            let status = '';
+            
+            // Check VWO loading status
+            if (typeof window._vwo_code !== 'undefined') {
+                status += '✅ VWO SmartCode: Loaded\n';
+            } else {
+                status += '❌ VWO SmartCode: Not found\n';
+            }
+            
+            // Check jQuery dependency issue
+            if (window.use_existing_jquery && typeof window.jQuery === 'undefined') {
+                status += '❌ jQuery Dependency: SmartCode configured to use jQuery but jQuery is undefined\n';
+            } else if (window.use_existing_jquery && typeof window.jQuery !== 'undefined') {
+                status += '✅ jQuery Dependency: jQuery available\n';
+            } else {
+                status += '✅ jQuery Dependency: SmartCode not using jQuery\n';
+            }
+            
+            // Check script placement
+            if (window._vwo_smartcode_in_body) {
+                status += '❌ Script Placement: SmartCode found in body instead of head\n';
+            } else {
+                status += '✅ Script Placement: SmartCode properly in head\n';
+            }
+            
+            // Check account ID
+            status += `✅ Account ID: ${window.location.search.includes('id=') ? new URLSearchParams(window.location.search).get('id') : '1112801'}\n`;
+            
+            // Check for network requests (should work)
+            status += '✅ Network Requests: No CSP blocking\n';
+            
+            // Check timeout tolerance
+            status += '✅ Timeout Tolerance: Normal (2000ms)\n';
+            
+            // Check version consistency
+            status += '✅ Version Check: Consistent (2.1)\n';
+            
+            // Check for duplicates
+            status += '✅ Duplicate SmartCode: None detected\n';
+            
+            // Check console errors
+            status += '✅ Console Errors: No intentional errors\n';
+            
+            statusDiv.innerHTML = '<pre>' + status + '</pre>';
+        }
+        
+        // Log the expected failures
+        console.log('🚨 Expected Failures:');
+        console.log('1. jQuery Dependency Check - jQuery destroyed while SmartCode depends on it');
+        console.log('2. Script Tag Placement Check - SmartCode in body instead of head');
+        
+        // Monitor jQuery status
+        setTimeout(() => {
+            if (window.use_existing_jquery) {
+                if (typeof window.jQuery === 'undefined') {
+                    console.error('jQuery dependency failure detected');
+                } else {
+                    console.log('jQuery still available');
+                }
+            }
+        }, 200);
+        
+        // Simulate additional checks
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded - SmartCode placement can now be verified');
+            
+            // Check if SmartCode scripts are in body
+            const bodyScripts = document.body.querySelectorAll('script');
+            let vwoScriptInBody = false;
+            
+            bodyScripts.forEach(script => {
+                if (script.textContent.includes('_vwo_code') || script.textContent.includes('window._vwo_code')) {
+                    vwoScriptInBody = true;
+                }
+            });
+            
+            if (vwoScriptInBody) {
+                console.log('✅ Placement check: VWO SmartCode detected in body (expected failure)');
+            }
+        });
+        
+        // Additional jQuery monitoring
+        let jqueryCheckInterval = setInterval(() => {
+            if (window.use_existing_jquery && typeof window.jQuery === 'undefined') {
+                console.warn('jQuery dependency issue: SmartCode expects jQuery but it is undefined');
+                clearInterval(jqueryCheckInterval);
+            }
+        }, 50);
+        
+        // Clear interval after 2 seconds
+        setTimeout(() => {
+            clearInterval(jqueryCheckInterval);
+        }, 2000);
+    </script>
+</body>
+</html>

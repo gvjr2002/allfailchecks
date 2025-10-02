@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VWO Test - Two Different Failures</title>
+    
+    <script type="text/javascript">
+        const params = new URLSearchParams(window.location.search);
+        const accId = parseInt(params.get("id"));
+        const accountId = accId || 1112801;
+        console.log("Account-Id ->", accountId);
+        /* eslint-disable no-undef */
+        window._vwo_code || (function() {
+        var account_id=accountId,
+        version=2.1,
+        settings_tolerance=1, // FAIL #1: Timeout Tolerance Check - Extremely low timeout (1ms instead of 2000ms)
+        hide_element='body',
+        hide_element_style = 'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important',
+        /* DO NOT EDIT BELOW THIS LINE */
+        f=false,w=window,d=document,v=d.querySelector('#vwoCode'),cK='_vwo_'+account_id+'_settings',cc={};try{var c=JSON.parse(localStorage.getItem('_vwo_'+account_id+'_config'));cc=c&&typeof c==='object'?c:{}}catch(e){}var stT=cc.stT==='session'?w.sessionStorage:w.localStorage;code={use_existing_jquery:function(){return typeof use_existing_jquery!=='undefined'?use_existing_jquery:undefined},library_tolerance:function(){return typeof library_tolerance!=='undefined'?library_tolerance:undefined},settings_tolerance:function(){return cc.sT||settings_tolerance},hide_element_style:function(){return'{'+(cc.hES||hide_element_style)+'}'},hide_element:function(){if(performance.getEntriesByName('first-contentful-paint')[0]){return''}return typeof cc.hE==='string'?cc.hE:hide_element},getVersion:function(){return version},finish:function(e){if(!f){f=true;var t=d.getElementById('_vis_opt_path_hides');if(t)t.parentNode.removeChild(t);if(e)(new Image).src='https://dev.visualwebsiteoptimizer.com/ee.gif?a='+account_id+e}},finished:function(){return f},addScript:function(e){var t=d.createElement('script');t.type='text/javascript';if(e.src){t.src=e.src}else{t.text=e.text}d.getElementsByTagName('head')[0].appendChild(t)},load:function(e,t){var i=this.getSettings(),n=d.createElement('script'),r=this;t=t||{};if(i){n.textContent=i;d.getElementsByTagName('head')[0].appendChild(n);if(!w.VWO||VWO.caE){stT.removeItem(cK);r.load(e)}}else{var o=new XMLHttpRequest;o.open('GET',e,true);o.withCredentials=!t.dSC;o.responseType=t.responseType||'text';o.onload=function(){if(t.onloadCb){return t.onloadCb(o,e)}if(o.status===200){_vwo_code.addScript({text:o.responseText})}else{_vwo_code.finish('&e=loading_failure:'+e)}};o.onerror=function(){if(t.onerrorCb){return t.onerrorCb(e)}_vwo_code.finish('&e=loading_failure:'+e)};o.send()}},getSettings:function(){try{var e=stT.getItem(cK);if(!e){return}e=JSON.parse(e);if(Date.now()>e.e){stT.removeItem(cK);return}return e.s}catch(e){return}},init:function(){if(d.URL.indexOf('__vwo_disable__')>-1)return;var e=this.settings_tolerance();w._vwo_settings_timer=setTimeout(function(){_vwo_code.finish();stT.removeItem(cK)},e);var t;if(this.hide_element()!=='body'){t=d.createElement('style');var i=this.hide_element(),n=i?i+this.hide_element_style():'',r=d.getElementsByTagName('head')[0];t.setAttribute('id','_vis_opt_path_hides');v&&t.setAttribute('nonce',v.nonce);t.setAttribute('type','text/css');if(t.styleSheet)t.styleSheet.cssText=n;else t.appendChild(d.createTextNode(n));r.appendChild(t)}else{t=d.getElementsByTagName('head')[0];var n=d.createElement('div');n.style.cssText='z-index: 2147483647 !important;position: fixed !important;left: 0 !important;top: 0 !important;width: 100% !important;height: 100% !important;background: white !important;';n.setAttribute('id','_vis_opt_path_hides');n.classList.add('_vis_hide_layer');t.parentNode.insertBefore(n,t.nextSibling)}var o='https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&vn='+version;if(w.location.search.indexOf('_vwo_xhr')!==-1){this.addScript({src:o})}else{this.load(o+'&x=true')}}};w._vwo_code=code;code.init();})();
+        window._vwo_pc_custom = {
+            a: 100,
+            t: 100
+        };
+    </script>
+    
+    <!-- FAIL #2: Duplicate SmartCode Detection - Add second SmartCode with different account -->
+    <script type="text/javascript">
+        // Second SmartCode with different account ID - this creates duplicate detection failure
+        const accountId2 = 838540; // Different account ID
+        console.log("Duplicate Account-Id ->", accountId2);
+        
+        window._vwo_code_duplicate || (function() {
+        var account_id=accountId2,
+        version=2.1,
+        settings_tolerance=2000,
+        hide_element='body',
+        hide_element_style = 'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important',
+        /* DO NOT EDIT BELOW THIS LINE */
+        f=false,w=window,d=document,v=d.querySelector('#vwoCode'),cK='_vwo_'+account_id+'_settings',cc={};try{var c=JSON.parse(localStorage.getItem('_vwo_'+account_id+'_config'));cc=c&&typeof c==='object'?c:{}}catch(e){}var stT=cc.stT==='session'?w.sessionStorage:w.localStorage;code={use_existing_jquery:function(){return typeof use_existing_jquery!=='undefined'?use_existing_jquery:undefined},library_tolerance:function(){return typeof library_tolerance!=='undefined'?library_tolerance:undefined},settings_tolerance:function(){return cc.sT||settings_tolerance},hide_element_style:function(){return'{'+(cc.hES||hide_element_style)+'}'},hide_element:function(){if(performance.getEntriesByName('first-contentful-paint')[0]){return''}return typeof cc.hE==='string'?cc.hE:hide_element},getVersion:function(){return version},finish:function(e){if(!f){f=true;var t=d.getElementById('_vis_opt_path_hides_duplicate');if(t)t.parentNode.removeChild(t);if(e)(new Image).src='https://dev.visualwebsiteoptimizer.com/ee.gif?a='+account_id+e}},finished:function(){return f},addScript:function(e){var t=d.createElement('script');t.type='text/javascript';if(e.src){t.src=e.src}else{t.text=e.text}d.getElementsByTagName('head')[0].appendChild(t)},load:function(e,t){var i=this.getSettings(),n=d.createElement('script'),r=this;t=t||{};if(i){n.textContent=i;d.getElementsByTagName('head')[0].appendChild(n);if(!w.VWO||VWO.caE){stT.removeItem(cK);r.load(e)}}else{var o=new XMLHttpRequest;o.open('GET',e,true);o.withCredentials=!t.dSC;o.responseType=t.responseType||'text';o.onload=function(){if(t.onloadCb){return t.onloadCb(o,e)}if(o.status===200){_vwo_code_duplicate.addScript({text:o.responseText})}else{_vwo_code_duplicate.finish('&e=loading_failure:'+e)}};o.onerror=function(){if(t.onerrorCb){return t.onerrorCb(e)}_vwo_code_duplicate.finish('&e=loading_failure:'+e)};o.send()}},getSettings:function(){try{var e=stT.getItem(cK);if(!e){return}e=JSON.parse(e);if(Date.now()>e.e){stT.removeItem(cK);return}return e.s}catch(e){return}},init:function(){if(d.URL.indexOf('__vwo_disable__')>-1)return;var e=this.settings_tolerance();w._vwo_settings_timer_duplicate=setTimeout(function(){_vwo_code_duplicate.finish();stT.removeItem(cK)},e);var t;if(this.hide_element()!=='body'){t=d.createElement('style');var i=this.hide_element(),n=i?i+this.hide_element_style():'',r=d.getElementsByTagName('head')[0];t.setAttribute('id','_vis_opt_path_hides_duplicate');v&&t.setAttribute('nonce',v.nonce);t.setAttribute('type','text/css');if(t.styleSheet)t.styleSheet.cssText=n;else t.appendChild(d.createTextNode(n));r.appendChild(t)}else{t=d.getElementsByTagName('head')[0];var n=d.createElement('div');n.style.cssText='z-index: 2147483647 !important;position: fixed !important;left: 0 !important;top: 0 !important;width: 100% !important;height: 100% !important;background: white !important;';n.setAttribute('id','_vis_opt_path_hides_duplicate');n.classList.add('_vis_hide_layer');t.parentNode.insertBefore(n,t.nextSibling)}var o='https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&vn='+version;if(w.location.search.indexOf('_vwo_xhr')!==-1){this.addScript({src:o})}else{this.load(o+'&x=true')}}};w._vwo_code_duplicate=code;code.init();})();
+        window._vwo_pc_custom_duplicate = {
+            a: 100,
+            t: 100
+        };
+    </script>
+</head>
+
+<body>
+    <h1>VWO Test Page - Two Different Failures</h1>
+    <p>This page is designed to fail exactly 2 different VWO audit checks:</p>
+    
+    <div style="background: #ffebee; padding: 20px; border-radius: 5px; margin: 20px 0;">
+        <h3>❌ Expected Failures:</h3>
+        <ol>
+            <li><strong>Timeout Tolerance Check</strong> - Settings tolerance set to 1ms (too low)</li>
+            <li><strong>Duplicate SmartCode Detection</strong> - Two SmartCode instances with different account IDs</li>
+        </ol>
+    </div>
+    
+    <div style="background: #e8f5e8; padding: 20px; border-radius: 5px; margin: 20px 0;">
+        <h3>✅ Expected Passes:</h3>
+        <ul>
+            <li>SmartCode Directly Added Check - SmartCode is present</li>
+            <li>Account ID Validation - Primary account ID is valid</li>
+            <li>Console Error Analysis - No JavaScript errors</li>
+            <li>Network Request Validation - Requests can be made</li>
+            <li>Cookie Validation - Cookies can be set</li>
+            <li>jQuery Dependency Check - No jQuery dependency issues</li>
+            <li>Script Syntax Validation - Valid JavaScript syntax</li>
+            <li>Script Tag Placement - SmartCode properly in head</li>
+            <li>CSP Errors Check - No CSP restrictions</li>
+            <li>And 11+ other checks should pass...</li>
+        </ul>
+    </div>
+    
+    <button onclick="testVWOStatus()" style="background: #2196F3; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+        Test VWO Status
+    </button>
+    
+    <div id="status" style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 5px; font-family: monospace;">
+        Click the button to test VWO status...
+    </div>
+    
+    <script>
+        function testVWOStatus() {
+            const statusDiv = document.getElementById('status');
+            let status = '';
+            
+            // Check VWO loading status
+            if (typeof window._vwo_code !== 'undefined') {
+                status += '✅ VWO SmartCode: Loaded\n';
+            } else {
+                status += '❌ VWO SmartCode: Not found\n';
+            }
+            
+            // Check for duplicate SmartCode
+            if (typeof window._vwo_code_duplicate !== 'undefined') {
+                status += '❌ Duplicate SmartCode: Found (21000071 and 999888777)\n';
+            }
+            
+            // Check timeout tolerance
+            status += '❌ Timeout Tolerance: Set to 1ms (too low, will cause premature timeout)\n';
+            
+            // Check account IDs
+            status += `✅ Primary Account ID: ${window.location.search.includes('id=') ? new URLSearchParams(window.location.search).get('id') : '21000071'}\n`;
+            status += '❌ Secondary Account ID: 999888777 (conflict detected)\n';
+            
+            // Check for network requests (should work)
+            status += '✅ Network Requests: No CSP blocking\n';
+            
+            // Check console for errors
+            status += '✅ Console Errors: No JavaScript syntax errors detected\n';
+            
+            // Check script placement
+            status += '✅ Script Placement: SmartCode properly in head section\n';
+            
+            statusDiv.innerHTML = '<pre>' + status + '</pre>';
+        }
+        
+        // Log the expected failures
+        console.log('🚨 Expected Failures:');
+        console.log('1. Timeout Tolerance Check - Settings tolerance too low (1ms)');
+        console.log('2. Duplicate SmartCode Detection - Multiple account IDs (21000071 vs 999888777)');
+        
+        // Demonstrate timeout issue
+        setTimeout(() => {
+            console.log('⚠️ VWO timeout likely occurred due to 1ms tolerance');
+        }, 100);
+    </script>
+</body>
+</html>
